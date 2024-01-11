@@ -19,12 +19,12 @@ namespace MVVM
 
         private void OnEnable()
         {
-            EnableCallbacksForModel();
+            EnableModelCallbacks();
         }
 
         private void OnDisable()
         {
-            DisableCallbacksForModel();
+            DisableModelCallbacks();
         }
 
         private void UpdateFirstName()

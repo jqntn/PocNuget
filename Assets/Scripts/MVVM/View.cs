@@ -17,12 +17,12 @@ namespace MVVM
                     mc.PropertyChanged?.Invoke();
         }
 
-        protected void EnableCallbacksForModel()
+        protected void EnableModelCallbacks()
         {
             model.PropertyChanged += OnPropertyChanged;
         }
 
-        protected void DisableCallbacksForModel()
+        protected void DisableModelCallbacks()
         {
             model.PropertyChanged -= OnPropertyChanged;
         }
