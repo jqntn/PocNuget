@@ -4,23 +4,25 @@ using UnityEngine;
 
 namespace MVVM
 {
-    internal abstract class View : MonoBehaviour
+    internal abstract class View<T> : MonoBehaviour where T : Model
     {
+        protected T model;
+
         protected List<ModelCallback> ModelCallbacks = new();
 
-        protected void OnPropertyChanged(object sender, PropertyChangedEventArgs args)
+        private void OnPropertyChanged(object sender, PropertyChangedEventArgs args)
         {
             foreach (var mc in ModelCallbacks)
-                if (args.PropertyName == mc.PropertyName || args.PropertyName == Model.ALL)
+                if (args.PropertyName == mc.PropertyName || args == Model.AllChanged)
                     mc.PropertyChanged?.Invoke();
         }
 
-        protected void EnableCallbacksForModel(in Model model)
+        protected void EnableCallbacksForModel()
         {
             model.PropertyChanged += OnPropertyChanged;
         }
 
-        protected void DisableCallbacksForModel(in Model model)
+        protected void DisableCallbacksForModel()
         {
             model.PropertyChanged -= OnPropertyChanged;
         }
