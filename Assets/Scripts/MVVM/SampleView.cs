@@ -10,11 +10,15 @@ namespace MVVM
 
             ModelCallbacks.Add(new(nameof(SampleModel.FirstName), UpdateFirstName));
             ModelCallbacks.Add(new(nameof(SampleModel.FamilyName), UpdateFamilyName));
+
+            ModelCallbacks.Add(new(nameof(SampleModel.SubChild), () => Debug.LogError($"OnPropertyChanged: {nameof(SampleModel.SubChild)} -> {model.Parent.Child.SubChild.i}")));
         }
 
         private void Start()
         {
             TriggerAllModelCallbacks();
+
+            model.SubChild = new SubChild { i = 1 };
         }
 
         private void OnEnable()
